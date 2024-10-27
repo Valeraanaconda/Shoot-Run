@@ -1,11 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
 
 public class bl_Joystick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
-
+    public event Action OnIsPointerDown;
+    public event Action OnIsPointerUp;
+    
     [Header("Settings")]
     [SerializeField, Range(1, 15)]private float Radio = 5;//the ratio of the circumference of the joystick
     [SerializeField, Range(0.01f, 1)]private float SmoothTime = 0.5f;//return to default position speed
@@ -101,6 +104,7 @@ public class bl_Joystick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             //then get the current id of the current touch.
             //this for avoid that other touch can take effect in the drag position event.
             //we only need get the position of this touch
+            OnIsPointerDown?.Invoke();
             lastId = data.pointerId;
             StopAllCoroutines();
             StartCoroutine(ScaleJoysctick(true));
@@ -150,6 +154,7 @@ public class bl_Joystick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         if (data.pointerId == lastId)
         {
             //-2 due -1 is the first touch id
+            OnIsPointerUp?.Invoke();
             lastId = -2;
             StopAllCoroutines();
             StartCoroutine(ScaleJoysctick(false));

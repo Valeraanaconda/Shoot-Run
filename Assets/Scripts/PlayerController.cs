@@ -6,6 +6,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bl_Joystick joystick;
     [SerializeField] private float speed = 5;
     [SerializeField] private float speedRotation = 10;
+    [SerializeField] private Animator _animator;
+
+    private void Start()
+    {
+        joystick.OnIsPointerDown += Walking;
+        joystick.OnIsPointerUp += Idle;
+    }
+
     void Update()
     {
         float v = joystick.Vertical;
@@ -20,5 +28,15 @@ public class PlayerController : MonoBehaviour
             var targetRotation = Quaternion.LookRotation(moveVector);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, speedRotation * Time.deltaTime);
         }
+    }
+
+    private void Walking()
+    {
+        _animator.SetBool("IsWalking", true);
+    }
+
+    private void Idle()
+    {
+        _animator.SetBool("IsWalking", false);
     }
 }
