@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -7,6 +8,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed = 5;
     [SerializeField] private float speedRotation = 10;
     [SerializeField] private Animator _animator;
+    [SerializeField] private GameObject m4_8;
+    [SerializeField] private GameObject m19111;
 
     private void Start()
     {
@@ -28,6 +31,14 @@ public class PlayerController : MonoBehaviour
             var targetRotation = Quaternion.LookRotation(moveVector);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, speedRotation * Time.deltaTime);
         }
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            SwitchWeaponPistol();
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            SwitchWeaponRiffle();
+        }
     }
 
     private void Walking()
@@ -38,5 +49,18 @@ public class PlayerController : MonoBehaviour
     private void Idle()
     {
         _animator.SetBool("IsWalking", false);
+    }
+
+    private void SwitchWeaponPistol()
+    {
+        _animator.SetBool("SwitchWeapon", true);
+        m4_8.SetActive(false);
+        m19111.SetActive(true); 
+    }
+    private void SwitchWeaponRiffle()
+    {
+        _animator.SetBool("SwitchWeapon", false);
+        m4_8.SetActive(true);
+        m19111.SetActive(false);
     }
 }
