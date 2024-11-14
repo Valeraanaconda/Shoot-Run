@@ -1,6 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,9 +6,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed = 5;
     [SerializeField] private float speedRotation = 10;
     [SerializeField] private Animator _animator;
-    [SerializeField] private GameObject m4_8;
-    [SerializeField] private GameObject m19111;
-
+    [SerializeField] private GameObject riffle;
+    [SerializeField] private GameObject pistol;
+    [Space] [SerializeField] private PlayerAimState playerAimState;
+    
     private void Start()
     {
         joystick.OnIsPointerDown += Walking;
@@ -43,24 +42,38 @@ public class PlayerController : MonoBehaviour
 
     private void Walking()
     {
-        _animator.SetBool("IsWalking", true);
+        _animator.SetBool(playerAimState.ToString(), true);
     }
 
     private void Idle()
     {
-        _animator.SetBool("IsWalking", false);
+        _animator.SetBool(playerAimState.ToString(), false);
     }
 
     private void SwitchWeaponPistol()
     {
-        _animator.SetBool("SwitchWeapon", true);
-        m4_8.SetActive(false);
-        m19111.SetActive(true); 
+        // _animator.SetBool("SwitchWeapon", true);
+        // _animator.SetBool("IsPistolRun", true);
+        _animator.SetTrigger("SwitchWeapon");
+        //_animator.SetBool(playerAimState.ToString(), false);
+        playerAimState = PlayerAimState.IsPistolRun;
+        riffle.SetActive(false);
+        pistol.SetActive(true); 
     }
     private void SwitchWeaponRiffle()
     {
-        _animator.SetBool("SwitchWeapon", false);
-        m4_8.SetActive(true);
-        m19111.SetActive(false);
+        // _animator.SetBool("SwitchWeapon", false);
+        // _animator.SetBool("IsPistolRun", false);
+        _animator.SetTrigger("SwitchWeapon");
+        //_animator.SetBool(playerAimState.ToString(), false);
+        playerAimState = PlayerAimState.IsRiffleRun;
+        riffle.SetActive(true);
+        pistol.SetActive(false); 
     }
+}
+
+public enum PlayerAimState
+{
+    IsPistolRun,
+    IsRiffleRun
 }
