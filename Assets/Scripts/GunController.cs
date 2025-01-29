@@ -7,6 +7,7 @@ public class GunController : MonoBehaviour
     [SerializeField] private float bulletSpeed = 20f;
     [SerializeField] private float fireRate = 0.5f;
     [SerializeField] private float nexFireTime = 0f;
+    [SerializeField] public float damage;
 
     private void Update()
     {
