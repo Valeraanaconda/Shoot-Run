@@ -1,25 +1,24 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Enemy:MonoBehaviour
+public class Enemy : MonoBehaviour
 {
-    [SerializeField] public float healthEnemy;
-    [SerializeField] private float gunDamage = 0.1F;
-    [SerializeField] public Image HealthBar;
-    public event Action<float> OnDamageTaken;
+    [SerializeField] private float _healthEnemy;
+    [SerializeField] private Image _healthBar;
+
+    private float _maxHealth;
+
     public void Start()
     {
-        OnDamageTaken += TakeDamage;
+        _maxHealth = _healthEnemy;
     }
+
     public void TakeDamage(float damage)
     {
-        healthEnemy -= damage;
-        HealthBar.fillAmount = healthEnemy;
-        if (healthEnemy <= 0) Destroy(gameObject);
-    }
-    public void OnCollisionEnter(Collision collision)
-    {
-        OnDamageTaken?.Invoke(gunDamage);
+        _healthEnemy -= damage;
+        _healthBar.fillAmount = _healthEnemy / _maxHealth;
+        
+        if (_healthEnemy <= 0) 
+            Destroy(gameObject);
     }
 }

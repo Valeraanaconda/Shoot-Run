@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
         float h = joystick.Horizontal;
 
         Vector3 moveVector = new Vector3(h, 0, v);
-        Vector3 translate = transform.position + moveVector * Time.deltaTime * speed;
+        Vector3 translate = transform.position + moveVector * (Time.deltaTime * speed);
         transform.position = translate;
 
         if (moveVector != Vector3.zero)

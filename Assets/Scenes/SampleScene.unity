@@ -2403,10 +2403,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 410036936824693428, guid: 2d248340f5a92e947a27ff49517ecaf5, type: 3}
   firePoint: {fileID: 6936167}
-  bulletSpeed: 25
-  fireRate: 0.1
+  _weaponConfig: {fileID: 11400000, guid: f50a7d92fffc04f4cab41d6bf8ebfe72, type: 2}
   nexFireTime: 0
-  damage: 0.1
 --- !u!4 &1991899711 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: c7741850eebe1df4ea75a80275b16311, type: 3}
@@ -2472,6 +2470,7 @@ GameObject:
   - component: {fileID: 2112117806}
   - component: {fileID: 2112117810}
   - component: {fileID: 2112117812}
+  - component: {fileID: 2112117813}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -2602,9 +2601,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c9032bf52469c04496a6935134454c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthEnemy: 1
-  gunDamage: 0.1
-  HealthBar: {fileID: 412438897}
+  _healthEnemy: 10
+  _healthBar: {fileID: 412438897}
+--- !u!114 &2112117813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112117805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4816548280754830815b3d10e3cf7cbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: 2112117812}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
